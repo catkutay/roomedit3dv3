@@ -22,7 +22,8 @@
 <h2><a name="1"></a>Forge Components</h2>
 <p><code>Roomedit3dv3</code> is based
 on <a href="http://twitter.com/F3lipek">Philippe Leefsma</a>'s
-node.js-based boilerplate projects for the <a href="http://forge.autodesk.com">Autodesk Forge Web Services APIs</a>.</p>
+<a href="https://github.com/Autodesk-Forge/forge-boilers.nodejs"><code>forge-boilers.nodejs</code> node.js-based boilerplate projects</a> for
+the <a href="http://forge.autodesk.com">Autodesk Forge Web Services APIs</a>.</p>
 <p>The following Forge APIs and components are used to manipuate a Revit BIM model:</p>
 <ul>
 <li>Authenticate and authorise the user &ndash; <a href="https://developer.autodesk.com/en/docs/oauth/v2">Authentication (OAuth)</a></li>
@@ -59,22 +60,8 @@ and <a href="https://github.com/Autodesk-Forge/forge-boilers.nodejs#boilers-setu
 <p>To run a production build, you can use start command:</p>
 <pre><code>&gt; npm start
 </code></pre>
-<p>This will run a production build and start the server.
-The production build code is minified and function names are mangled which make it much smaller and impractical for debugging or reverse engineering.</p>
-<p>To deploy on Heroku, simply click on the button below, at the Heroku Create New App page:</p>
-<ul>
-<li>Set your Client ID &amp; Client Secret with your Forge API keys</li>
-</ul>
-<p><a href="https://heroku.com/deploy?template=https://github.com/Autodesk-Forge/forge-boilers.nodejs/tree/project5"><img alt="Deploy" src="https://www.herokucdn.com/deploy/button.svg" /></a></p>
-<p>The result displays a treeview of the OSS storage that lets you upload designs and perform actions from the context menu:</p>
-<p><img alt="Project5" src="resources/img/Project5.png" /></p>
-<p>To load a design in the viewer:</p>
-<ul>
-<li>Right-click the root node to create a new bucket if you do not have any</li>
-<li>Upload the design file to the bucket (supports file selection dialog or drag &amp; drop)</li>
-<li>Upon successful upload, the file appears in the bucket, right-click and select <b>Generate viewable</b></li>
-<li>Upon successful translation of the design, double-click the file and it will get loaded in the viewer</li>
-</ul>
+<p>This will run a production build and start the server.</p>
+<p>The production build code is minified and function names are mangled, making it smaller and impractical for debugging or reverse engineering.</p>
 <p>To download and view files stored in the OSS, you need a valid callback url to achieve 3-legged oauth authentication.</p>
 <p>I recommend you create two separate sets of Forge API keys, one for DEVELOPMENT and one for PRODUCTION, because each set has a different callback url.</p>
 <p>To run the project locally (using the DEV API keys):</p>
@@ -96,13 +83,13 @@ The production build code is minified and function names are mangled which make 
 &gt; set FORGE_CLIENT_SECRET=&lt;&lt;YOUR CLIENT SECRET&gt;&gt;
 &gt; npm start
 </code></pre>
-<p>To deploy this project to Heroku, simply click on the button below, at the Heroku Create New App page:</p>
+<p>To deploy this project to Heroku, click on the button below at the Heroku Create New App page:</p>
 <ul>
 <li>Set your Client ID &amp; Client Secret with your Forge API keys.</li>
 <li>Specify the HOST_URL env variable based on the name of your Heroku App, e.g., <code>MyApp</code> would map to <code>HOST_URL=https://MyApp.herokuapp.com</code>.</li>
 <li>Your Forge App callback must be set to <b>https://MyApp.herokuapp.com/api/forge/callback/oauth</b>.</li>
 </ul>
-<p><a href="https://heroku.com/deploy?template=https://github.com/Autodesk-Forge/forge-boilers.nodejs/tree/project6"><img alt="Deploy" src="https://www.herokucdn.com/deploy/button.svg" /></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/jeremytammik/roomedit3dv3"><img alt="Deploy" src="https://www.herokucdn.com/deploy/button.svg" /></a></p>
 <p>The result will look like this, displaying a treeview of your Autodesk Cloud storage that lets you upload designs and perform actions from the context menu:</p>
 <p><img alt="Project6" src="resources/img/Project6.png" /></p>
 <p>To load a design in the viewer:</p>
