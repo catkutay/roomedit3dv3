@@ -15,7 +15,24 @@ Forge Viewer extension to move building elements and update the Revit BIM in rea
 
 This is a [node.js](https://nodejs.org) web server implementing a Forge Viewer extension.
 
-It is based
+
+
+
+This sample demonstrates the following main interesting aspects:
+
+- [Interactive model modification in the Forge Viewer](#2)
+- [Communication back from viewer client to node.js web server via REST](#3)
+- [Communication back from the web server to the C# desktop add-in and BIM via socket.io](#4)
+
+TOC:
+
+- [Forge Components, Prerequisites and Sample Setup]
+- [Round-Trip BIM Manipulaton via Forge and Roomedit3dv3]
+- [Connecting desktop and cloud](#1)
+
+## Forge Components, Prerequisites and Sample Setup
+
+`Roomedit3dv3` is based
 on [Philippe Leefsma](http://twitter.com/F3lipek)'s
 node.js-based boilerplate projects for the [Autodesk Forge Web Services APIs](http://forge.autodesk.com).
 
@@ -33,6 +50,16 @@ Just as Philippe original boilerplate code, this sample illustrates use of the f
 - [forge.model.derivative-js](https://github.com/Autodesk-Forge/forge.model.derivative-js)
 - [forge.data.management-js](https://github.com/Autodesk-Forge/forge.data.management-js)
 
+Please refer to Philippe's original documentation for
+the [prerequisites](https://github.com/Autodesk-Forge/forge-boilers.nodejs#prerequisites)
+and [sample setup](https://github.com/Autodesk-Forge/forge-boilers.nodejs#boilers-setup).
+
+Its describes the detailed steps required to set up your own Forge account,
+install and modify the sample to use your credentials and deploy as a local server or on a platform such
+as [Heroku](https://heroku.com).
+
+## Round-Trip BIM Manipulaton via Forge and Roomedit3dv3
+
 The `roomedit3dv3` viewer extension enables interactive selection and movement of selected BIM elements in the model on screen.
 
 The updated elements and their new locations are transferred back from the viewer client to the web server via a REST API call.
@@ -49,19 +76,8 @@ Todo: add a project identifier to the broadcasts to enable the C# add-in broadco
 
 The selected element is identified via its Revit UniqueId.
 
-This sample demonstrates the following main interesting aspects:
 
-- [Interactive model modification in the Forge Viewer](#2)
-- [Communication back from viewer client to node.js web server via REST](#3)
-- [Communication back from the web server to the C# desktop add-in and BIM via socket.io](#4)
 
-Please refer to Philippe's original documentation for
-the [prerequisites](https://github.com/Autodesk-Forge/forge-boilers.nodejs#prerequisites)
-and [sample setup](https://github.com/Autodesk-Forge/forge-boilers.nodejs#boilers-setup).
-
-Its describes the detailed steps required to set up your own Forge account,
-install and modify the sample to use your credentials and deploy as a local server or on a platform such
-as [Heroku](https://heroku.com).
 
 
 ## <a name="98"></a>Authors
