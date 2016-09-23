@@ -236,13 +236,21 @@ Then, instead of <b>npm run dev</b>, use the following:
 Which executes <b>nodemon bin/run.js --config nodemon.js</b>, where the <b>nodemon.js</b> is the nodemon config file where you can define which directories and file types are being watched, along with other configuration options.
 See [nodemon](https://github.com/remy/nodemon) for more details.
 
-## License
 
-[MIT License](http://opensource.org/licenses/MIT)
 
-## Written by 
+## <a name="98"></a>Authors
 
-Written by [Philippe Leefsma](http://twitter.com/F3lipek)
+- [Philippe Leefsma](http://adndevblog.typepad.com/cloud_and_mobile/philippe-leefsma.html), Autodesk Developer Network.
+- Jeremy Tammik,
+[The Building Coder](http://thebuildingcoder.typepad.com) and
+[The 3D Web Coder](http://the3dwebcoder.typepad.com),
+[ADN](http://www.autodesk.com/adn)
+[Open](http://www.autodesk.com/adnopen),
+[Forge Partner Development](http://forge.autodesk.com),
+[Autodesk Inc.](http://www.autodesk.com)
 
-Forge Partner Development - [http://forge.autodesk.com](http://forge.autodesk.com)
 
+## <a name="99"></a>License
+
+This sample is licensed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+Please see the [LICENSE](LICENSE) file for full details.
