@@ -114,7 +114,7 @@ The dedicated C# .NET Revit add-in [Roomedit3dApp](https://github.com/jeremytamm
 ## <a name="98"></a>Authors
 
 - [Philippe Leefsma](http://adndevblog.typepad.com/cloud_and_mobile/philippe-leefsma.html),
-[Autodesk]((http://www.autodesk.com)) [Forge Partner Development](http://forge.autodesk.com)
+[Autodesk](http://www.autodesk.com) [Forge Partner Development](http://forge.autodesk.com)
 - Jeremy Tammik,
 [The Building Coder](http://thebuildingcoder.typepad.com) and
 [The 3D Web Coder](http://the3dwebcoder.typepad.com),
