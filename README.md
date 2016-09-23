@@ -26,7 +26,14 @@ The following Forge APIs and components are used to manipuate a Revit BIM model:
 - Translate and access its geometry and metadata &ndash; [Model Derivative API](https://developer.autodesk.com/en/docs/model-derivative/v2)
 - Display to the user &ndash; [Viewer](https://developer.autodesk.com/en/docs/viewer/v2)
 
-A Viewer extension client app enables interactive selection and movement of selected BIM elements in the model on screen.
+Just as Philippe original boilerplate code, this sample illustrates use of the following Forge npm packages:
+
+- [forge.oauth2-js](https://github.com/Autodesk-Forge/forge.oauth2-js)
+- [forge.oss-js](https://github.com/Autodesk-Forge/forge.oss-js)
+- [forge.model.derivative-js](https://github.com/Autodesk-Forge/forge.model.derivative-js)
+- [forge.data.management-js](https://github.com/Autodesk-Forge/forge.data.management-js)
+
+The `roomedit3dv3` viewer extension enables interactive selection and movement of selected BIM elements in the model on screen.
 
 The updated elements and their new locations are transferred back from the viewer client to the web server via a REST API call.
 
@@ -42,18 +49,11 @@ Todo: add a project identifier to the broadcasts to enable the C# add-in broadco
 
 The selected element is identified via its Revit UniqueId.
 
-This sample demonstrates two interesting aspects:
+This sample demonstrates the following main interesting aspects:
 
 - [Interactive model modification in the Forge Viewer](#2)
 - [Communication back from viewer client to node.js web server via REST](#3)
 - [Communication back from the web server to the C# desktop add-in and BIM via socket.io](#4)
-
-Just as Philippe original boilerplate code, this sample illustrates use of the following Forge npm packages:
-
-- [forge.oauth2-js](https://github.com/Autodesk-Forge/forge.oauth2-js)
-- [forge.oss-js](https://github.com/Autodesk-Forge/forge.oss-js)
-- [forge.model.derivative-js](https://github.com/Autodesk-Forge/forge.model.derivative-js)
-- [forge.data.management-js](https://github.com/Autodesk-Forge/forge.data.management-js)
 
 ## Prerequisites
 
