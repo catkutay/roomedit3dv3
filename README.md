@@ -1,4 +1,4 @@
-# Forge Node.js Boilers
+# Roomedit3dv3
 
 [![Node.js](https://img.shields.io/badge/Node.js-4.4.3-blue.svg)](https://nodejs.org/)
 [![npm](https://img.shields.io/badge/npm-2.15.1-blue.svg)](https://www.npmjs.com/)
@@ -10,31 +10,67 @@
 [![Model-Derivative](https://img.shields.io/badge/Model%20Derivative-v2-green.svg)](http://developer.autodesk.com/)
 
 ## Description
-A collection of node.js-based boiler projects for the [Autodesk Forge Web Services APIs](http://forge.autodesk.com).
 
-Those samples illustrates how to use the following Forge npm packages:
+Forge Viewer extension to move building elements and update the Revit BIM in real-time using [socket.io](http://socket.io).
 
- * [forge.oauth2-js](https://github.com/Autodesk-Forge/forge.oauth2-js)
- * [forge.oss-js](https://github.com/Autodesk-Forge/forge.oss-js)
- * [forge.model.derivative-js](https://github.com/Autodesk-Forge/forge.model.derivative-js)
- * [forge.data.management-js](https://github.com/Autodesk-Forge/forge.data.management-js)
+This is a [node.js](https://nodejs.org) web server implementing a Forge Viewer extension.
+
+It is based
+on [Philippe Leefsma](http://twitter.com/F3lipek)'s
+node.js-based boilerplate projects for the [Autodesk Forge Web Services APIs](http://forge.autodesk.com).
+
+The following Forge APIs and components are used to manipuate a Revit BIM model:
+
+- Authenticate and authorise the user &ndash; [Authentication (OAuth)](https://developer.autodesk.com/en/docs/oauth/v2)
+- Access and download a RVT project file from A360 &ndash; [Data Management API](https://developer.autodesk.com/en/docs/data/v2)
+- Translate and access its geometry and metadata &ndash; [Model Derivative API](https://developer.autodesk.com/en/docs/model-derivative/v2)
+- Display to the user &ndash; [Viewer](https://developer.autodesk.com/en/docs/viewer/v2)
+
+A Viewer extension client app enables interactive selection and movement of selected BIM elements in the model on screen.
+
+The updated elements and their new locations are transferred back from the viewer client to the web server via a REST API call.
+
+The server in turn uses [socket.io](http://socket.io) to broadcast the updates to the rest of the universe.
+
+This broadcast is picked up by the [Roomedit3dApp](https://github.com/jeremytammik/Roomedit3dApp) C# .NET Revit add-in client.
+
+This version supersedes its precursor [roomedit3d](https://github.com/jeremytammik/roomedit3d), which was hardwired for a specific model.
+
+In `roomedit3dv3`, any model can be selected.
+
+Todo: add a project identifier to the broadcasts to enable the C# add-in broadcoast receivers to igonre all messages not pertaining to the current Revit BIM.
+
+The selected element is identified via its Revit UniqueId.
+
+This sample demonstrates two interesting aspects:
+
+- [Interactive model modification in the Forge Viewer](#2)
+- [Communication back from viewer client to node.js web server via REST](#3)
+- [Communication back from the web server to the C# desktop add-in and BIM via socket.io](#4)
+
+Just as Philippe original boilerplate code, this sample illustrates use of the following Forge npm packages:
+
+- [forge.oauth2-js](https://github.com/Autodesk-Forge/forge.oauth2-js)
+- [forge.oss-js](https://github.com/Autodesk-Forge/forge.oss-js)
+- [forge.model.derivative-js](https://github.com/Autodesk-Forge/forge.model.derivative-js)
+- [forge.data.management-js](https://github.com/Autodesk-Forge/forge.data.management-js)
 
 ## Prerequisites
 
 To run those samples, you need your own Forge API credentials:
 
- * Visit the [Forge Developer Portal](https://developer.autodesk.com), sign up for an account
- * [Create a new App](https://developer.autodesk.com/myapps/create)
- * For this new App, you can use <b>http://localhost:3000/api/forge/callback/oauth</b> as Callback URL.
- * Take note of the <b>Client ID</b> and <b>Client Secret</b>, those are your API keys that must remain hidden
- * Install the latest release of [NodeJS](https://nodejs.org)
- * Clone this or download this project. It's recommended to install a git client such as [GitHub desktop](https://desktop.github.com/) or [SourceTree](https://www.sourcetreeapp.com/)
- * To clone it via command line, use the following (<b>Terminal</b> on MacOSX/Linux, <b>Git Shell</b> on Windows):
+- Visit the [Forge Developer Portal](https://developer.autodesk.com) and sign up for an account
+- [Create a new App](https://developer.autodesk.com/myapps/create)
+- Specify **`http://localhost:3000/api/forge/callback/oauth`** as the app callback URL
+- Take note of the <b>Client ID</b> and <b>Client Secret</b>; those are your API keys that must remain hidden
+- Install the latest release of [NodeJS](https://nodejs.org)
+- Clone or download this project. It is recommended to install a git client such as [GitHub desktop](https://desktop.github.com/) or [SourceTree](https://www.sourcetreeapp.com/)
+- To clone it via the command line, use the following command (<b>Terminal</b> on MacOSX/Linux, <b>Git Shell</b> on Windows):
 
     > git clone https://github.com/Autodesk-Forge/forge-boilers.nodejs
 
 
-## Boilers Setup
+## Sample Setup
 
 Below are instructions to setup and run locally each boiler project, they may vary based on which project you want to run.
 
