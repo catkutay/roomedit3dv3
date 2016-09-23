@@ -1,0 +1,84 @@
+<h1>Roomedit3dv3</h1>
+<p><a href="https://nodejs.org/"><img alt="Node.js" src="https://img.shields.io/badge/Node.js-4.4.3-blue.svg" /></a>
+<a href="https://www.npmjs.com/"><img alt="npm" src="https://img.shields.io/badge/npm-2.15.1-blue.svg" /></a>
+<a href="http://opensource.org/licenses/MIT"><img alt="License" src="http://img.shields.io/:license-mit-blue.svg" /></a></p>
+<p><a href="http://developer.autodesk.com/"><img alt="oAuth2" src="https://img.shields.io/badge/oAuth2-v1-green.svg" /></a>
+<a href="http://developer.autodesk.com/"><img alt="Data-Management" src="https://img.shields.io/badge/Data%20Management-v1-green.svg" /></a>
+<a href="http://developer.autodesk.com/"><img alt="OSS" src="https://img.shields.io/badge/OSS-v2-green.svg" /></a>
+<a href="http://developer.autodesk.com/"><img alt="Model-Derivative" src="https://img.shields.io/badge/Model%20Derivative-v2-green.svg" /></a></p>
+<h2>Description</h2>
+<p>Forge Viewer extension to move building elements and update the Revit BIM in real-time using <a href="http://socket.io">socket.io</a>.</p>
+<p>This is a <a href="https://nodejs.org">node.js</a> web server implementing a Forge Viewer extension.</p>
+<p>This sample demonstrates the following main interesting aspects:</p>
+<ul>
+<li><a href="#2">Interactive model modification in the Forge Viewer</a></li>
+<li><a href="#3">Communication back from viewer client to node.js web server via REST</a></li>
+<li><a href="#4">Communication back from the web server to the C# desktop add-in and BIM via socket.io</a></li>
+</ul>
+<p>TOC:</p>
+<ul>
+<li><a href="#forge-components-prerequisites-and-sample-setup">Forge Components, Prerequisites and Sample Setup</a></li>
+<li><a href="#round-trip-bim-manipulaton-via-forge-and-roomedit3dv3">Round-Trip BIM Manipulaton via Forge and Roomedit3dv3</a></li>
+<li><a href="#1">Connecting desktop and cloud</a></li>
+</ul>
+<h2>Forge Components, Prerequisites and Sample Setup</h2>
+<p><code>Roomedit3dv3</code> is based
+on <a href="http://twitter.com/F3lipek">Philippe Leefsma</a>'s
+node.js-based boilerplate projects for the <a href="http://forge.autodesk.com">Autodesk Forge Web Services APIs</a>.</p>
+<p>The following Forge APIs and components are used to manipuate a Revit BIM model:</p>
+<ul>
+<li>Authenticate and authorise the user &ndash; <a href="https://developer.autodesk.com/en/docs/oauth/v2">Authentication (OAuth)</a></li>
+<li>Access and download a RVT project file from A360 &ndash; <a href="https://developer.autodesk.com/en/docs/data/v2">Data Management API</a></li>
+<li>Translate and access its geometry and metadata &ndash; <a href="https://developer.autodesk.com/en/docs/model-derivative/v2">Model Derivative API</a></li>
+<li>Display to the user &ndash; <a href="https://developer.autodesk.com/en/docs/viewer/v2">Viewer</a></li>
+</ul>
+<p>Just as Philippe original boilerplate code, this sample illustrates use of the following Forge npm packages:</p>
+<ul>
+<li><a href="https://github.com/Autodesk-Forge/forge.oauth2-js">forge.oauth2-js</a></li>
+<li><a href="https://github.com/Autodesk-Forge/forge.oss-js">forge.oss-js</a></li>
+<li><a href="https://github.com/Autodesk-Forge/forge.model.derivative-js">forge.model.derivative-js</a></li>
+<li><a href="https://github.com/Autodesk-Forge/forge.data.management-js">forge.data.management-js</a></li>
+</ul>
+<p>Please refer to Philippe's original documentation for
+the <a href="https://github.com/Autodesk-Forge/forge-boilers.nodejs#prerequisites">prerequisites</a>
+and <a href="https://github.com/Autodesk-Forge/forge-boilers.nodejs#boilers-setup">sample setup</a>.</p>
+<p>Its describes the detailed steps required to set up your own Forge account,
+install and modify the sample to use your credentials and deploy as a local server or on a platform such
+as <a href="https://heroku.com">Heroku</a>.</p>
+<h2>Round-Trip BIM Manipulaton via Forge and Roomedit3dv3</h2>
+<p>The <code>roomedit3dv3</code> viewer extension enables interactive selection and movement of selected BIM elements in the model on screen.</p>
+<p>The updated elements and their new locations are transferred back from the viewer client to the web server via a REST API call.</p>
+<p>The server in turn uses <a href="http://socket.io">socket.io</a> to broadcast the updates to the rest of the universe.</p>
+<p>This broadcast is picked up by the <a href="https://github.com/jeremytammik/Roomedit3dApp">Roomedit3dApp</a> C# .NET Revit add-in client.</p>
+<p>This version supersedes its precursor <a href="https://github.com/jeremytammik/roomedit3d">roomedit3d</a>, which was hardwired for a specific model.</p>
+<p>In <code>roomedit3dv3</code>, any model can be selected.</p>
+<p>Todo: add a project identifier to the broadcasts to enable the C# add-in broadcoast receivers to igonre all messages not pertaining to the current Revit BIM.</p>
+<p>The selected element is identified via its Revit UniqueId.</p>
+<h2><a name="1"></a>Connecting Desktop and Cloud</h2>
+<p><code>Roomedit3dv3</code> is a member of the suite of samples connecting the desktop and the cloud.</p>
+<p>Each of the samples consists of a C# .NET Revit API desktop add-in and a web server:</p>
+<ul>
+<li><a href="https://github.com/jeremytammik/RoomEditorApp">RoomEditorApp</a> and  the <a href="https://github.com/jeremytammik/roomedit">roomeditdb</a> CouchDB
+    database and web server demonstrating real-time round-trip graphical editing of furniture family instance location and rotation plus textual editing of element properties in a simplified 2D representation of the 3D BIM.</li>
+<li><a href="https://github.com/jeremytammik/FireRatingCloud">FireRatingCloud</a> and
+    the <a href="https://github.com/jeremytammik/firerating">fireratingdb</a> node.js
+    MongoDB web server demonstrating real-time round-trip editing of Revit element shared parameter values.</li>
+<li><a href="https://github.com/jeremytammik/Roomedit3dApp">Roomedit3dApp</a> and
+  the first <a href="https://github.com/jeremytammik/roomedit3d">roomedit3d</a> Forge Viewer extension demonstrating translation of furniture family instances in the viewer and updating the Revit BIM in real time via a socket.io broadcast with a hard-coded sample model.</li>
+<li><a href="https://github.com/jeremytammik/Roomedit3dApp">Roomedit3dApp</a> and
+  the <a href="https://github.com/jeremytammik/roomedit3d">roomedit3dv3</a> Forge Viewer extension demonstrating the same functionality with a user selected model stored in A360.</li>
+</ul>
+<h2><a name="98"></a>Authors</h2>
+<ul>
+<li><a href="http://adndevblog.typepad.com/cloud_and_mobile/philippe-leefsma.html">Philippe Leefsma</a>, Autodesk Developer Network.</li>
+<li>Jeremy Tammik,
+<a href="http://thebuildingcoder.typepad.com">The Building Coder</a> and
+<a href="http://the3dwebcoder.typepad.com">The 3D Web Coder</a>,
+<a href="http://www.autodesk.com/adn">ADN</a>
+<a href="http://www.autodesk.com/adnopen">Open</a>,
+<a href="http://forge.autodesk.com">Forge Partner Development</a>,
+<a href="http://www.autodesk.com">Autodesk Inc.</a></li>
+</ul>
+<h2><a name="99"></a>License</h2>
+<p>This sample is licensed under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.
+Please see the <a href="LICENSE">LICENSE</a> file for full details.</p>

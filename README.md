@@ -15,22 +15,16 @@ Forge Viewer extension to move building elements and update the Revit BIM in rea
 
 This is a [node.js](https://nodejs.org) web server implementing a Forge Viewer extension.
 
+- [Forge Components, Prerequisites and Sample Setup](#1)
+- [Round-Trip BIM Manipulaton via Forge and Roomedit3dv3](#2)
+- [Connecting desktop and cloud](#3)
+- [Interactive model modification in the Forge Viewer](#4)
+- [Communication back from viewer client to node.js web server via REST](#5)
+- [Communication back from the web server to the C# desktop add-in and BIM via socket.io](#6)
 
 
 
-This sample demonstrates the following main interesting aspects:
-
-- [Interactive model modification in the Forge Viewer](#2)
-- [Communication back from viewer client to node.js web server via REST](#3)
-- [Communication back from the web server to the C# desktop add-in and BIM via socket.io](#4)
-
-TOC:
-
-- [Forge Components, Prerequisites and Sample Setup]
-- [Round-Trip BIM Manipulaton via Forge and Roomedit3dv3]
-- [Connecting desktop and cloud](#1)
-
-## Forge Components, Prerequisites and Sample Setup
+## <a name="1"></a>Forge Components, Prerequisites and Sample Setup
 
 `Roomedit3dv3` is based
 on [Philippe Leefsma](http://twitter.com/F3lipek)'s
@@ -58,7 +52,8 @@ Its describes the detailed steps required to set up your own Forge account,
 install and modify the sample to use your credentials and deploy as a local server or on a platform such
 as [Heroku](https://heroku.com).
 
-## Round-Trip BIM Manipulaton via Forge and Roomedit3dv3
+
+## <a name="2"></a>Round-Trip BIM Manipulaton via Forge and Roomedit3dv3
 
 The `roomedit3dv3` viewer extension enables interactive selection and movement of selected BIM elements in the model on screen.
 
@@ -77,7 +72,7 @@ Todo: add a project identifier to the broadcasts to enable the C# add-in broadco
 The selected element is identified via its Revit UniqueId.
 
 
-## <a name="1"></a>Connecting Desktop and Cloud
+## <a name="3"></a>Connecting Desktop and Cloud
 
 `Roomedit3dv3` is a member of the suite of samples connecting the desktop and the cloud.
 
