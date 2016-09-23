@@ -19,9 +19,7 @@ This is a [node.js](https://nodejs.org) web server implementing a Forge Viewer e
 - [Round-Trip BIM Manipulaton via Forge and Roomedit3dv3](#2)
 - [Connecting desktop and cloud](#3)
 - [Interactive model modification in the Forge Viewer](#4)
-- [Communication back from viewer client to node.js web server via REST](#5)
-- [Communication back from the web server to the C# desktop add-in and BIM via socket.io](#6)
-
+- [Communication Back from Viewer Client to Node.js Web Server to Desktop BIM](#5)
 
 
 ## <a name="1"></a>Forge Components, Prerequisites and Sample Setup
@@ -88,6 +86,29 @@ Each of the samples consists of a C# .NET Revit API desktop add-in and a web ser
 - [Roomedit3dApp](https://github.com/jeremytammik/Roomedit3dApp) and
   the [roomedit3dv3](https://github.com/jeremytammik/roomedit3d) Forge Viewer extension demonstrating the same functionality with a user selected model stored in A360.
 
+
+## <a name="4"></a>Interactive Model Modification in the Forge Viewer
+
+The `Roomedit3dTranslationTool` implements a viewer extension that enables the user to select a component and interactively move it around on the screen, defining a translation to be applied to it and communicated back to the source CAD model.
+
+
+## <a name="5"></a>Communication Back from Viewer Client to Node.js Web Server to Desktop BIM
+
+![Roomedit3dv3 architecture](img/roomedit3d_architecture.png "Roomedit3d architecture")
+
+The View and Data API provides view functionality only, no edit.
+
+The pre-defined communication path goes from the desktop to the cloud, from the source CAD model to the translated View and Data API buckets and JSON data bubbles.
+
+This sample demonstrates an interactive modification of the three.js graphics presented by the View and Data API viewer, and a communication path to send updated element location information back to the desktop product in real time.
+
+In this case, the source desktop CAD model is a Revit BIM, and the modifications applied are furniture family instance translations.
+
+The viewer client in the browser uses [fetch](https://github.com/github/fetch) to implement a REST API POST call to communicate the modified element external id and translation back to the node.js server.
+
+The node.js server uses a [socket.io](http://socket.io) broadcast to notify the desktop of the changes.
+
+The dedicated C# .NET Revit add-in [Roomedit3dApp](https://github.com/jeremytammik/Roomedit3dApp) subscribes to the socket.io channel, retrieves the updating data and raises an external event to obtain a valid Revit API context and apply it to the BIM.
 
 
 ## <a name="98"></a>Authors
