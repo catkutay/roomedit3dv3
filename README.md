@@ -15,18 +15,22 @@ Forge Viewer extension to move building elements and update the Revit BIM in rea
 
 This is a [node.js](https://nodejs.org) web server implementing a Forge Viewer extension.
 
-- [Forge Components, Prerequisites and Sample Setup](#1)
-- [Round-Trip BIM Manipulaton via Forge and Roomedit3dv3](#2)
-- [Connecting desktop and cloud](#3)
-- [Interactive model modification in the Forge Viewer](#4)
-- [Communication Back from Viewer Client to Node.js Web Server to Desktop BIM](#5)
+- [Forge Components](#1)
+- [Prerequisites and Sample Setup](#2)
+- [Round-Trip BIM Manipulaton via Forge and Roomedit3dv3](#3)
+- [Connecting desktop and cloud](#4)
+- [Interactive model modification in the Forge Viewer](#5)
+- [Communication Back from Viewer Client to Node.js Web Server to Desktop BIM](#6)
+- [Authors](#98)
+- [License](#99)
 
 
-## <a name="1"></a>Forge Components, Prerequisites and Sample Setup
+## <a name="1"></a>Forge Components
 
 `Roomedit3dv3` is based
 on [Philippe Leefsma](http://twitter.com/F3lipek)'s
-node.js-based boilerplate projects for the [Autodesk Forge Web Services APIs](http://forge.autodesk.com).
+[`forge-boilers.nodejs` node.js-based boilerplate projects](https://github.com/Autodesk-Forge/forge-boilers.nodejs) for
+the [Autodesk Forge Web Services APIs](http://forge.autodesk.com).
 
 The following Forge APIs and components are used to manipuate a Revit BIM model:
 
@@ -42,13 +46,87 @@ Just as Philippe original boilerplate code, this sample illustrates use of the f
 - [forge.model.derivative-js](https://github.com/Autodesk-Forge/forge.model.derivative-js)
 - [forge.data.management-js](https://github.com/Autodesk-Forge/forge.data.management-js)
 
-Please refer to Philippe's original documentation for
-the [prerequisites](https://github.com/Autodesk-Forge/forge-boilers.nodejs#prerequisites)
+
+## <a name="2"></a>Prerequisites and Sample Setup
+
+For a full detailed description of the steps required to set up your own Forge account,
+install and modify the sample to use your credentials and deploy as a local server or on a platform such
+as [Heroku](https://heroku.com),
+please refer to Philippe's original documentation for the
+boilerplate [prerequisites](https://github.com/Autodesk-Forge/forge-boilers.nodejs#prerequisites)
 and [sample setup](https://github.com/Autodesk-Forge/forge-boilers.nodejs#boilers-setup).
 
-Its describes the detailed steps required to set up your own Forge account,
-install and modify the sample to use your credentials and deploy as a local server or on a platform such
-as [Heroku](https://heroku.com).
+In brief:
+
+This project uses [Webpack](https://webpack.github.io) and NPM packages to build and generate the frontend code, so an extra build step is required.
+
+On Mac OSX and Linux, run the following in Terminal:
+
+    > npm install
+    > export FORGE_CLIENT_ID=<<YOUR CLIENT ID FROM DEVELOPER PORTAL>>
+    > export FORGE_CLIENT_SECRET=<<YOUR CLIENT SECRET>>
+    > npm run build-dev (this runs a dev build and webpack in --watch mode)
+    > npm run dev (runs the node server, do in another terminal if you want to keep the webpack watcher running)
+
+Under Windows, replace `export` by `set`.
+
+Open your browser at [http://localhost:3000](http://localhost:3000).
+
+<b>Important:</b> the `npm start` command is intended for <b>PRODUCTION</b> with HTTPS (SSL) secure cookies.
+
+To run a production build, you can use start command:
+
+    > npm start
+
+This will run a production build and start the server.
+
+The production build code is minified and function names are mangled, making it smaller and impractical for debugging or reverse engineering.
+
+To download and view files stored in the OSS, you need a valid callback url to achieve 3-legged oauth authentication.
+ 
+I recommend you create two separate sets of Forge API keys, one for DEVELOPMENT and one for PRODUCTION, because each set has a different callback url.
+
+To run the project locally (using the DEV API keys):
+
+- Make sure the callback url for your DEV Forge API Keys is set to <b>http://localhost:3000/api/forge/callback/oauth</b>.
+
+![forge-dev](resources/img/forge-dev.png)
+
+Run the following commands (mind the DEV!):
+
+    > npm install
+    > set FORGE_DEV_CLIENT_ID=<<YOUR DEV CLIENT ID FROM DEVELOPER PORTAL>>
+    > set FORGE_DEV_CLIENT_SECRET=<<YOUR DEV CLIENT SECRET>>
+    > npm run build-dev
+    > npm run dev
+
+To run in production, the callback url defined for your Forge App needs to match the host url, so, for example, if you run your app from <b>https://mydomain.com</b>:
+
+    > npm install
+    > set HOST_URL=https://mydomain.com
+    > set FORGE_CLIENT_ID=<<YOUR CLIENT ID FROM DEVELOPER PORTAL>>
+    > set FORGE_CLIENT_SECRET=<<YOUR CLIENT SECRET>>
+    > npm start
+
+To deploy this project to Heroku, click on the button below at the Heroku Create New App page:
+
+- Set your Client ID & Client Secret with your Forge API keys.
+- Specify the HOST_URL env variable based on the name of your Heroku App, e.g., `MyApp` would map to `HOST_URL=https://MyApp.herokuapp.com`.
+- Your Forge App callback must be set to <b>https://MyApp.herokuapp.com/api/forge/callback/oauth</b>.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Autodesk-Forge/forge-boilers.nodejs/tree/project6)
+
+The result will look like this, displaying a treeview of your Autodesk Cloud storage that lets you upload designs and perform actions from the context menu:
+
+![Project6](resources/img/Project6.png)
+
+To load a design in the viewer:
+
+- Right-click the nodes to get options from the context menu.
+- Upload a design file to a folder (supports file selection dialog or drag & drop).
+- Upon successful upload, the file appears under the parent node in the tree, right-click and select <b>Generate viewable</b>.
+- Upon successful translation of the design, double-click the file to load it into the viewer.
+
 
 
 ## <a name="2"></a>Round-Trip BIM Manipulaton via Forge and Roomedit3dv3
