@@ -96,13 +96,13 @@ The `Roomedit3dTranslationTool` implements a viewer extension that enables the u
 
 ![Roomedit3dv3 architecture](img/roomedit3d_architecture.png "Roomedit3d architecture")
 
-The View and Data API provides view functionality only, no edit.
+The Forge Viewer itself provides viewing functionality only, no editing.
 
-The pre-defined communication path goes from the desktop to the cloud, from the source CAD model to the translated View and Data API buckets and JSON data bubbles.
+The pre-defined Forge communication path is one-way only, from the desktop to the cloud, from the source 'seed' CAD model to the translated Forge API bucket and JSON data bubble stream.
 
-This sample demonstrates an interactive modification of the three.js graphics presented by the View and Data API viewer, and a communication path to send updated element location information back to the desktop product in real time.
+This sample demonstrates an interactive modification of the [three.js](http://threejs.org) graphics presented by the viewer and a communication path to send updated element location information back to the desktop product in real time.
 
-In this case, the source desktop CAD model is a Revit BIM, and the modifications applied are furniture family instance translations.
+In this case, the source desktop CAD model is a Revit BIM, and the modifications applied are building element translations.
 
 The viewer client in the browser uses [fetch](https://github.com/github/fetch) to implement a REST API POST call to communicate the modified element external id and translation back to the node.js server.
 
