@@ -143,7 +143,7 @@ This version supersedes its precursor [roomedit3d](https://github.com/jeremytamm
 
 In `roomedit3dv3`, any model can be selected.
 
-Todo: add a project identifier to the broadcasts to enable the C# add-in broadcoast receivers to igonre all messages not pertaining to the current Revit BIM.
+Todo: add a project identifier to the broadcasts to enable the C# add-in broadcoast receivers to ignore all messages not pertaining to the current Revit BIM.
 
 The selected element is identified via its Revit UniqueId.
 
